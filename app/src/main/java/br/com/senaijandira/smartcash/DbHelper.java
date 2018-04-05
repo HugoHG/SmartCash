@@ -13,7 +13,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static String DB_NAME = "db_smartcash.db";
 
     //versão do banco
-    private static int DB_VERSION = 1;
+    private static int DB_VERSION = 2;
 
     //construtor da classe para criação do banco
     public DbHelper(Context ctx){
@@ -28,7 +28,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
 
         String sql2 = "create table tbl_movimentacao(_idMovimentacao integer primary key autoincrement, receita_despesa text, " +
-                "mes text, idCategoria integer, nomeDespesa text, descricao text, ano integer, valor real);";
+                "mes text, categoria text, nomeDespesa text, descricao text, ano integer, valor real);";
         db.execSQL(sql2);
     }
 

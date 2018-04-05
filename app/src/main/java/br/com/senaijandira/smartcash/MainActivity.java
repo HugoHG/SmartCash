@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,19 +72,23 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         */
 
-        Categoria lazer = new Categoria(1, "lazer", "l");
+        Categoria geral = new Categoria(1, "geral", "g");
 
-        Categoria transporte = new Categoria(2, "transporte", "t");
+        Categoria lazer = new Categoria(2, "lazer", "l");
 
-        Categoria saude = new Categoria(3, "saude", "s");
+        Categoria transporte = new Categoria(3, "transporte", "t");
 
-        Categoria moradia = new Categoria(4, "moradia", "m");
+        Categoria saude = new Categoria(4, "saude", "s");
 
-        Categoria salario = new Categoria(5, "salario", "salario");
+        Categoria moradia = new Categoria(5, "moradia", "m");
 
-        Categoria outros = new Categoria(6, "outros", "o");
+        Categoria salario = new Categoria(6, "salario", "salario");
+
+        Categoria outros = new Categoria(7, "outros", "o");
 
         listaCategorias = new ArrayList<>();
+
+        listaCategorias.add(geral);
 
         listaCategorias.add(lazer);
 
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         listaCategorias.add(outros);
 
-        txt_categoria.setText(lazer.getNomeCategoria());
+        txt_categoria.setText(geral.getNomeCategoria());
 
 
         materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
@@ -107,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         final Intent pgCadMov = new Intent(this, CadastroMovimentacao.class);
+        pgCadMov.putExtra("receita_despesa", "receita");
+
+        final Intent pgCadMov2 = new Intent(this, CadastroMovimentacao.class);
+        pgCadMov2.putExtra("receita_despesa", "despesa");
+
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu first item clicked
@@ -116,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu second item clicked
-
+                startActivity(pgCadMov2);
             }
         });
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
@@ -140,15 +150,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        String nomCat = txt_categoria.getText().toString();
+
         //Pegando os contatos do banco
         ArrayList<Movimentacao> movimentacoesCadastradas;
-        movimentacoesCadastradas = mDao.selecionarTodos(this);
+        if (nomCat.equals("geral")){
+            movimentacoesCadastradas = mDao.selecionarTodos(this);
+        } else {
+            movimentacoesCadastradas = mDao.selecionarPorCategoria(this, nomCat);
+        }
 
         //limpar o conteudo
         adapter.clear();
 
         //preenchendo o adaptador
         adapter.addAll(movimentacoesCadastradas);
+
     }
 
     @Override
@@ -187,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        onResume();
     }
 
     public void prev_Category(View v) {
@@ -203,5 +221,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        onResume();
     }
 }

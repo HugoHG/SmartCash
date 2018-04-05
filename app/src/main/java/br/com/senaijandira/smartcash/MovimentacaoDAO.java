@@ -31,7 +31,7 @@ public class MovimentacaoDAO {
         ContentValues movimentacoes = new ContentValues();
         movimentacoes.put("receita_despesa", m.getReceita_despesa());
         movimentacoes.put("mes", m.getMes());
-        movimentacoes.put("idCategoria", m.getIdCategoria());
+        movimentacoes.put("categoria", m.getCategoria());
         movimentacoes.put("nomeDespesa", m.getNomeMovimentacao());
         movimentacoes.put("descricao", m.getDescricao());
         movimentacoes.put("ano", m.getAno());
@@ -62,7 +62,34 @@ public class MovimentacaoDAO {
             m.setIdMovimentacao(cursor.getInt(0)/*acessando a coluna do ID*/);
             m.setReceita_despesa(cursor.getString(1));
             m.setMes(cursor.getString(2));
-            m.setIdCategoria(cursor.getInt(3));
+            m.setCategoria(cursor.getString(3));
+            m.setNomeMovimentacao(cursor.getString(4));
+            m.setDescricao(cursor.getString(5));
+            m.setAno(cursor.getInt(6));
+            m.setValor(cursor.getFloat(7));
+
+            Log.d("nome", m.getNomeMovimentacao());
+
+            retorno.add(m);
+        }
+        return retorno;
+    }
+
+    public ArrayList<Movimentacao> selecionarPorCategoria(Context context, String nomeCategoria) {
+
+        //banco de dados de leitura
+        SQLiteDatabase db = new DbHelper(context).getReadableDatabase();
+        ArrayList<Movimentacao> retorno = new ArrayList<Movimentacao>();
+
+        String sql = "select * from tbl_movimentacao where categoria = '" + nomeCategoria + "';" ;
+        Cursor cursor = db.rawQuery(sql, null);
+
+        while (cursor.moveToNext()) {
+            Movimentacao m = new Movimentacao();
+            m.setIdMovimentacao(cursor.getInt(0)/*acessando a coluna do ID*/);
+            m.setReceita_despesa(cursor.getString(1));
+            m.setMes(cursor.getString(2));
+            m.setCategoria(cursor.getString(3));
             m.setNomeMovimentacao(cursor.getString(4));
             m.setDescricao(cursor.getString(5));
             m.setAno(cursor.getInt(6));

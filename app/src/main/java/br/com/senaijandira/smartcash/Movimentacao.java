@@ -8,7 +8,7 @@ public class Movimentacao {
     private Integer idMovimentacao;
     private String receita_despesa;
     private String mes;
-    private Integer idCategoria;
+    private String categoria;
     private String nomeMovimentacao;
     private String descricao;
     private Integer ano;
@@ -37,14 +37,6 @@ public class Movimentacao {
 
     public void setMes(String mes) {
         this.mes = mes;
-    }
-
-    public Integer getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Integer idCategoria) {
-        this.idCategoria = idCategoria;
     }
 
     public String getNomeMovimentacao() {
@@ -77,5 +69,13 @@ public class Movimentacao {
 
     public void setValor(Float valor) {
         this.valor = valor;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
