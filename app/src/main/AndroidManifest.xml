@@ -22,6 +22,10 @@
         <activity
             android:name=".CadastroMovimentacao"
             android:label="@string/title_activity_cadastro_movimentacao"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CadastroCategoria"
+            android:label="@string/title_activity_cadastro_categoria"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

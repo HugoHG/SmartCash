@@ -12,6 +12,7 @@ public class Movimentacao {
     private String nomeMovimentacao;
     private String descricao;
     private Integer ano;
+    private Float valor;
 
 
     public Integer getIdMovimentacao() {
@@ -68,5 +69,13 @@ public class Movimentacao {
 
     public void setAno(Integer ano) {
         this.ano = ano;
+    }
+
+    public Float getValor() {
+        return valor;
+    }
+
+    public void setValor(Float valor) {
+        this.valor = valor;
     }
 }

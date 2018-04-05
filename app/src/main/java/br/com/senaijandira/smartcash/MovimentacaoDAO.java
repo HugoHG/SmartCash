@@ -4,13 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by 17170098 on 21/03/2018.
  */
-/*
+
 public class MovimentacaoDAO {
     private static MovimentacaoDAO instance;
     public static MovimentacaoDAO getInstance() {
@@ -27,19 +29,17 @@ public class MovimentacaoDAO {
         SQLiteDatabase db = new DbHelper(context).getWritableDatabase();
 
         ContentValues movimentacoes = new ContentValues();
-        movimentacoes.put("nome", m.getNomeMovimentacao());
+        movimentacoes.put("receita_despesa", m.getReceita_despesa());
+        movimentacoes.put("mes", m.getMes());
+        movimentacoes.put("idCategoria", m.getIdCategoria());
+        movimentacoes.put("nomeDespesa", m.getNomeMovimentacao());
+        movimentacoes.put("descricao", m.getDescricao());
+        movimentacoes.put("ano", m.getAno());
+        movimentacoes.put("valor", m.getValor());
 
+        Log.d("receita", m.getReceita_despesa());
 
-        //TODO: Arrumar a data de nascimento e incluir a foto
-        //valores.put("dt_nascimento", c.getDt_nascimento());
-        //
-
-        if (c.getFoto() != null) {
-            valores.put("foto", transformarParaBytes(c.getFoto()));
-        }
-
-
-        Long id = db.insert("tbl_contato", null, valores);
+        Long id = db.insert("tbl_movimentacao", null, movimentacoes);
 
         if (id != -1)
             return true;
@@ -48,35 +48,30 @@ public class MovimentacaoDAO {
 
     }
 
-    public ArrayList<Contato> selecionarTodos(Context context) {
+    public ArrayList<Movimentacao> selecionarTodos(Context context) {
 
         //banco de dados de leitura
         SQLiteDatabase db = new DbHelper(context).getReadableDatabase();
-        ArrayList<Contato> retorno = new ArrayList<Contato>();
+        ArrayList<Movimentacao> retorno = new ArrayList<Movimentacao>();
 
-        String sql = "select * from tbl_contato;";
+        String sql = "select * from tbl_movimentacao;";
         Cursor cursor = db.rawQuery(sql, null);
 
         while (cursor.moveToNext()) {
-            Contato c = new Contato();
-            c.setId(cursor.getInt(0)/*acessando a coluna do ID)
-            c.setNome(cursor.getString(1));
-            c.setTelefone(cursor.getString(2));
-            c.setEmail(cursor.getString(3));
+            Movimentacao m = new Movimentacao();
+            m.setIdMovimentacao(cursor.getInt(0)/*acessando a coluna do ID*/);
+            m.setReceita_despesa(cursor.getString(1));
+            m.setMes(cursor.getString(2));
+            m.setIdCategoria(cursor.getInt(3));
+            m.setNomeMovimentacao(cursor.getString(4));
+            m.setDescricao(cursor.getString(5));
+            m.setAno(cursor.getInt(6));
+            m.setValor(cursor.getFloat(7));
 
-            //TODO: arrumar dt nascimento e foto
+            Log.d("nome", m.getNomeMovimentacao());
 
-            c.setDt_nascimento(new Date());
-
-            byte[] fotoBanco = cursor.getBlob(5);
-
-            if(fotoBanco!=null && fotoBanco.length > 0){
-                c.setFoto(transformarParaBitmap(fotoBanco));
-            }
-
-            retorno.add(c);
+            retorno.add(m);
         }
         return retorno;
     }
 }
-*/

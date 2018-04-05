@@ -12,16 +12,49 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome"/>
+        android:hint="Nome"
+        android:id="@+id/nomeMovimentacao"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descrição"/>
+        android:hint="Mes"
+        android:id="@+id/mesMovimentacao"/>
 
-    <Spinner
-        android:id="@+id/planets_spinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="idCategoria"
+        android:id="@+id/idCategoriaMovimentacao"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:id="@+id/descMovimentacao"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ano"
+        android:id="@+id/anoMovimentacao"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor"
+        android:id="@+id/valorMovimentacao"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Receita/despesa"
+        android:id="@+id/receita_depesa"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar"
+        android:onClick="salvar"/>
 
 </LinearLayout>

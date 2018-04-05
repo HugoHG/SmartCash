@@ -28,7 +28,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
 
         String sql2 = "create table tbl_movimentacao(_idMovimentacao integer primary key autoincrement, receita_despesa text, " +
-                "mes text, idCategoria integer, nomeDespesa text, descricao text, ano integer);";
+                "mes text, idCategoria integer, nomeDespesa text, descricao text, ano integer, valor real);";
         db.execSQL(sql2);
     }
 

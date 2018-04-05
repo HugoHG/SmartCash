@@ -11,12 +11,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Categoria> listaCategorias;
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3;
+    MovimentacaoDAO mDao;
+    ListView list_view_movimentacoes;
+    MovimentacaoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
+
 
 
 
@@ -95,10 +105,12 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton2 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item2);
         floatingActionButton3 = (FloatingActionButton) findViewById(R.id.material_design_floating_action_menu_item3);
 
+
+        final Intent pgCadMov = new Intent(this, CadastroMovimentacao.class);
         floatingActionButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO something when floating action menu first item clicked
-
+                startActivity(pgCadMov);
             }
         });
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +126,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mDao = MovimentacaoDAO.getInstance();
+
+        list_view_movimentacoes = (ListView) findViewById(R.id.list_view_movimentacoes);
+
+        adapter = new MovimentacaoAdapter(this, new ArrayList<Movimentacao>());
+
+        list_view_movimentacoes.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //Pegando os contatos do banco
+        ArrayList<Movimentacao> movimentacoesCadastradas;
+        movimentacoesCadastradas = mDao.selecionarTodos(this);
+
+        //limpar o conteudo
+        adapter.clear();
+
+        //preenchendo o adaptador
+        adapter.addAll(movimentacoesCadastradas);
     }
 
     @Override
