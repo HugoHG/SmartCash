@@ -22,6 +22,12 @@
             android:layout_height="wrap_content"
             android:text="Saldo"
             android:gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_saldo"
+            android:textSize="50dp"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -53,13 +59,13 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Geral"
                     android:layout_gravity="center_vertical"
                     android:textSize="20sp"
                     android:layout_marginLeft="80dp"
                     android:layout_marginRight="80dp"
                     android:id="@+id/txt_categoria"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:onClick="excluirCategoria"/>
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

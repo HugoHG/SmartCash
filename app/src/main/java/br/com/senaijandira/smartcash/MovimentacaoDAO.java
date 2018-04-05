@@ -101,4 +101,10 @@ public class MovimentacaoDAO {
         }
         return retorno;
     }
+
+    public Boolean remover(Context context, Integer idMov) {
+        SQLiteDatabase db = new DbHelper(context).getWritableDatabase();
+        db.delete("tbl_movimentacao", "_idMovimentacao = ?", new String[]{idMov.toString()});
+        return true;
+    }
 }

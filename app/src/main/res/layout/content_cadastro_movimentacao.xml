@@ -24,12 +24,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="categoria"
-        android:id="@+id/categoriaMovimentacao"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="Descrição"
         android:id="@+id/descMovimentacao"/>
 
@@ -43,13 +37,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Valor"
-        android:id="@+id/valorMovimentacao"/>
+        android:id="@+id/valorMovimentacao"
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Receita/despesa"
         android:id="@+id/receita_depesa"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/planets_spinner"></Spinner>
 
     <Button
         android:layout_width="match_parent"

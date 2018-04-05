@@ -6,16 +6,25 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.com.senaijandira.smartcash.CadastroCategoria"
-    tools:showIn="@layout/activity_cadastro_categoria">
+    tools:showIn="@layout/activity_cadastro_categoria"
+    android:orientation="vertical">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome"/>
+        android:hint="Nome"
+        android:id="@+id/nomeCategoria"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descrição"/>
+        android:hint="Descrição"
+        android:id="@+id/descCategoria"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="salvar"
+        android:onClick="salvar"/>
 
 </LinearLayout>

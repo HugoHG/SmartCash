@@ -33,7 +33,7 @@ public class Categoria {
         this.descCategoria = descCategoria;
     }
 
-    public Categoria(int idCategoria, String nomeCategoria, String descCategoria){
+    public Categoria(String nomeCategoria, String descCategoria){
         this.idCategoria = idCategoria;
         this.nomeCategoria = nomeCategoria;
         this.descCategoria = descCategoria;

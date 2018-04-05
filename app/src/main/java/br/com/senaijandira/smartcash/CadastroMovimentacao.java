@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 public class CadastroMovimentacao extends AppCompatActivity {
 
     EditText nomeMovimentacao;
@@ -22,33 +24,35 @@ public class CadastroMovimentacao extends AppCompatActivity {
     EditText valorMovimentacao;
     EditText receita_despesa;
     String controle;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_movimentacao);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
 
-                Intent intent = new Intent();
-            }
-        });
+        ArrayList<Categoria> listCat = new ArrayList<>();
+        listCat = CategoriaDAO.getInstance().selecionarTodos(this);
 
-        /*Spinner spinner = (Spinner) findViewById(R.id.planets_spinner);
+        ArrayList<String> categorias = new ArrayList<>();
+
+        for (Categoria c : listCat){
+            categorias.add(c.getNomeCategoria());
+        }
+
+        spinner = (Spinner) findViewById(R.id.planets_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, android.R.layout.simple_spinner_item);*/
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categorias);
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        /*adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+        ArrayAdapter<String> spinnerArrayAdapter = arrayAdapter;
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);*/
+        //spinner.setAdapter(adapter);
+        spinner.setAdapter(spinnerArrayAdapter);
 
         nomeMovimentacao = (EditText) findViewById(R.id.nomeMovimentacao);
         mesMovimentacao = (EditText) findViewById(R.id.mesMovimentacao);
@@ -57,6 +61,7 @@ public class CadastroMovimentacao extends AppCompatActivity {
         anoMovimentacao = (EditText) findViewById(R.id.anoMovimentacao);
         valorMovimentacao = (EditText) findViewById(R.id.valorMovimentacao);
         receita_despesa = (EditText) findViewById(R.id.receita_depesa);
+
 
         Intent it = getIntent();
 
@@ -73,9 +78,11 @@ public class CadastroMovimentacao extends AppCompatActivity {
     public void salvar(View v){
         Movimentacao mov = new Movimentacao();
 
+        Log.d("item", spinner.getSelectedItem().toString());
+
         mov.setNomeMovimentacao(nomeMovimentacao.getText().toString());
         mov.setMes(mesMovimentacao.getText().toString());
-        mov.setCategoria(categoriaMovimentacao.getText().toString());
+        mov.setCategoria(spinner.getSelectedItem().toString());
         mov.setDescricao(descMovimentacao.getText().toString());
         mov.setAno(Integer.parseInt(anoMovimentacao.getText().toString()));
 
@@ -84,7 +91,7 @@ public class CadastroMovimentacao extends AppCompatActivity {
         if (controle.equals("receita")){
             mov.setValor(Float.parseFloat(valorMovimentacao.getText().toString()));
         } else{
-            Float valor = Float.parseFloat(valorMovimentacao.toString()) * -1;
+            Float valor = Float.parseFloat(valorMovimentacao.getText().toString()) * -1;
             mov.setValor(valor);
         }
 

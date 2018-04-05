@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+android:id="@+id/new_window"
+android:icon="@drawable/ic_file_download_black_36dp"
+android:title="New Window"/>
+
+<item
+android:icon="@drawable/ic_file_upload_black_36dp"
+android:title="Bookmarks"/>
+
+<item
+android:icon="@drawable/ic_info_black_24dp"
+android:title="Windows"/>
+
+<item
+android:icon="@drawable/ic_file_download_black_36dp"
+android:title="Refresh"/>
+    </menu>
